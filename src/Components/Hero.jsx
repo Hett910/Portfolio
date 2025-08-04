@@ -125,7 +125,7 @@ const HeroSection = () => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   className="relative flex items-center text-white px-5 py-2.5 md:px-6 md:py-3.5 bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl border border-gray-700 hover:border-transparent text-sm md:text-base"
-                  href="../../public/HettSoni_BackendDeveloper.pdf"
+                  href="/HettSoni_BackendDeveloper.pdf"
                 >
                   <span>Get Resume</span>
                 </motion.a>
