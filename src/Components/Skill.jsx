@@ -276,11 +276,6 @@ const Skill = () => {
                     color: "text-yellow-400",
                   },
                   {
-                    name: "Responsive Design",
-                    icon: "html5/html5-original",
-                    color: "text-orange-400",
-                  },
-                  {
                     name: "GraphQL",
                     icon: "graphql/graphql-plain",
                     color: "text-pink-500",

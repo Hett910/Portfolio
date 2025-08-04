@@ -7,8 +7,7 @@ const Header = () => {
   const navItems = [
     { name: "About Me", id: "about-me" },
     { name: "Skills", id: "skills" },
-    { name: "Projects", id: "projects" },
-    { name: "Contact", id: "contact" }
+    { name: "Projects", id: "projects" }
   ];
 
   // Close mobile nav on resize
@@ -110,6 +109,28 @@ const Header = () => {
                 </motion.div>
               ))}
             </div>
+
+            {/* Contact button (right) */}
+            <motion.div
+              className="absolute right-0"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <a
+                href="#contact"
+                className="text-white rounded-lg bg-gray-800 hover:bg-gray-700 px-8 py-3 text-sm tracking-wider transition-all duration-300 border border-gray-700 hover:border-indigo-600"
+              >
+                Contact Me
+                <motion.span
+                  className="ml-2 inline-block"
+                  animate={{ x: [0, 4, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
+                >
+                  →
+                </motion.span>
+              </a>
+            </motion.div>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -158,7 +179,7 @@ const Header = () => {
               transition={{ duration: 0.3, ease: "easeInOut" }}
             >
               <div className="px-6 py-4 space-y-6">
-                {navItems.map((item, index) => (
+                {[...navItems, { name: "Contact", id: "contact" }].map((item, index) => (
                   <motion.div
                     key={item.id}
                     initial={{ x: -20, opacity: 0 }}
