@@ -1,10 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaBars, FaTimes } from "react-icons/fa";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const navItems = ["WORK", "ABOUT", "CONTACT"];
+  const navItems = [
+    { name: "About Me", id: "about-me" },
+    { name: "Skills", id: "skills" },
+    { name: "Projects", id: "projects" },
+    { name: "Contact", id: "contact" }
+  ];
+
+  // Close mobile nav on resize
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0, y: -20 },
@@ -28,21 +45,6 @@ const Header = () => {
         ease: [0.22, 1, 0.36, 1],
       },
     },
-    hover: {
-      color: "#3B82F6",
-      transition: { duration: 0.2 },
-    },
-  };
-
-  const underlineVariants = {
-    hidden: { scaleX: 0, originX: 0 },
-    hover: {
-      scaleX: 1,
-      transition: {
-        duration: 0.4,
-        ease: [0.22, 1, 0.36, 1],
-      },
-    },
   };
 
   return (
@@ -54,28 +56,26 @@ const Header = () => {
     >
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
-          {/* Animated Logo with Blue Hover */}
+          {/* Logo */}
           <motion.div className="relative group" variants={itemVariants}>
-            <motion.a
+            <a
               href="#"
               className="font-mono text-lg font-medium text-gray-300 flex items-center"
-              whileHover={{ color: "#3B82F6" }}
-            ></motion.a>
+            ></a>
           </motion.div>
 
-          {/* Enhanced Desktop Navigation */}
-          <nav className="hidden p-2 md:flex items-center justify-center w-full relative">
-            {/* Your name with elegant animation - positioned absolutely on left */}
+          {/* Desktop nav */}
+          <nav className="hidden md:flex items-center justify-center w-full relative">
+            {/* Name (left) */}
             <motion.div
               className="absolute left-0"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <motion.a
+              <a
                 href="#"
                 className="text-2xl font-bold tracking-tight relative group"
-                whileHover={{ scale: 1.05 }}
               >
                 <span className="text-white mr-2">Het</span>
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-emerald-400">
@@ -87,70 +87,32 @@ const Header = () => {
                   whileHover={{ scaleX: 1 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 />
-              </motion.a>
+              </a>
             </motion.div>
 
-            {/* Centered navigation items with enhanced animations */}
+            {/* Nav items (center) */}
             <div className="flex space-x-12">
-              {["About Me", "Skills", "Projects"].map((item) => (
+              {navItems.map((item) => (
                 <motion.div
-                  key={item}
+                  key={item.id}
                   className="relative"
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <motion.a
-                    href={`#${item.toLowerCase().replace(" ", "-")}`}
+                  <a
+                    href={`#${item.id}`}
                     className="text-gray-300 text-lg font-medium tracking-wider relative group"
-                    whileHover={{
-                      color: "#3B82F6",
-                      y: -2,
-                    }}
                   >
-                    {item}
-                    <motion.span
-                      className="absolute bottom-0 left-0 w-0 h-[2px] bg-blue-500 group-hover:w-full"
-                      transition={{ duration: 0.3, ease: "easeOut" }}
-                    />
-                  </motion.a>
+                    {item.name}
+                    <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-blue-500 group-hover:w-full transition-all duration-300 ease-out" />
+                  </a>
                 </motion.div>
               ))}
             </div>
-
-            {/* Contact Me button with floating animation */}
-            <motion.div
-              className="absolute right-0"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <motion.a
-                href="#contact"
-                className="text-white rounded-lg bg-gray-800 hover:bg-gray-700 px-8 py-4 text-sm tracking-wider transition-all duration-300 border border-gray-700 hover:border-indigo-600"
-                whileHover={{
-                  y: -3,
-                  scale: 1.05,
-                  boxShadow: "0 8px 20px rgba(59, 130, 246, 0.4)",
-                }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Contact Me
-                <motion.span
-                  className="ml-2"
-                  animate={{ x: [0, 4, 0] }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: Infinity,
-                    repeatType: "reverse",
-                  }}
-                >
-                  →
-                </motion.span>
-              </motion.a>
-            </motion.div>
           </nav>
-          {/* Animated Mobile Menu Button */}
+
+          {/* Mobile Menu Button */}
           <motion.button
             className="md:hidden text-gray-400 z-50 p-2 rounded-full"
             onClick={() => setIsOpen(!isOpen)}
@@ -185,11 +147,11 @@ const Header = () => {
           </motion.button>
         </div>
 
-        {/* Animated Mobile Menu */}
+        {/* Mobile Menu */}
         <AnimatePresence>
           {isOpen && (
             <motion.nav
-              className="md:hidden absolute top-full left-0 w-full bg-gray-900/95 backdrop-blur-sm overflow-hidden"
+              className="md:hidden absolute top-full left-0 w-full bg-gray-900/95 backdrop-blur-sm border-t border-gray-800"
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
@@ -198,7 +160,7 @@ const Header = () => {
               <div className="px-6 py-4 space-y-6">
                 {navItems.map((item, index) => (
                   <motion.div
-                    key={item}
+                    key={item.id}
                     initial={{ x: -20, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{
@@ -209,11 +171,11 @@ const Header = () => {
                     whileTap={{ scale: 0.95 }}
                   >
                     <a
-                      href={`#${item.toLowerCase()}`}
+                      href={`#${item.id}`}
                       className="block text-gray-400 hover:text-blue-500 text-lg font-medium py-2 transition-colors"
                       onClick={() => setIsOpen(false)}
                     >
-                      {item}
+                      {item.name}
                     </a>
                     <div className="h-px bg-gray-800 mt-2"></div>
                   </motion.div>

@@ -46,7 +46,6 @@ import Skill from './Components/Skill'
 import WorkExp from './Components/WorkExp' 
 import Hero from '../src/Components/Hero'
 import Header from '../src/Components/Header'
-import Footer from './Components/Footer'
 import Projects from './Components/Projects'
 
 
@@ -61,7 +60,6 @@ function App() {
      <Skill />
      <Projects />
      <Contace />
-     <Footer/>
     </>
   )
 }

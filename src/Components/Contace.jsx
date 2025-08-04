@@ -2,10 +2,8 @@ import React, { useRef, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import {
   FiMail,
-  FiMessageSquare,
   FiGithub,
   FiLinkedin,
-  FiTwitter,
 } from "react-icons/fi";
 import { SiMedium, SiWhatsapp } from "react-icons/si";
 import emailjs from "@emailjs/browser";
@@ -46,7 +44,6 @@ const Contact = () => {
       icon: <FiLinkedin />,
       url: "https://www.linkedin.com/in/het-soni-b89857257/",
     },
-    // { name: "Twitter", icon: <FiTwitter />, url: "https://twitter.com" },
     {
       name: "WhatsApp",
       icon: <SiWhatsapp />,
@@ -66,12 +63,11 @@ const Contact = () => {
 
     emailjs
       .sendForm(
-        "service_861qcpq", // Replace with your EmailJS service ID
-        "template_wj0ti8q", // Replace with your EmailJS template ID
+        "service_861qcpq",
+        "template_wj0ti8q",
         formRef.current,
-        "9ZapFBll3DCbvlikU" // Replace with your EmailJS public key
+        "9ZapFBll3DCbvlikU"
       )
-
       .then(
         (result) => {
           console.log(result.text);
@@ -90,14 +86,10 @@ const Contact = () => {
   };
 
   return (
-    <section
-      id="contact"
-      className="relative py-28 bg-gray-950 px-5 overflow-hidden"
-    >
-      {/* Background elements */}
+    <section id="contact" className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gray-950 overflow-hidden">
       <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-indigo-900 rounded-full filter blur-3xl opacity-10 mix-blend-multiply"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-emerald-900 rounded-full filter blur-3xl opacity-10 mix-blend-multiply"></div>
+        <div className="absolute top-0 left-1/4 w-72 h-72 sm:w-96 sm:h-96 bg-indigo-900 rounded-full filter blur-3xl opacity-10 mix-blend-multiply"></div>
+        <div className="absolute bottom-0 right-1/4 w-72 h-72 sm:w-96 sm:h-96 bg-emerald-900 rounded-full filter blur-3xl opacity-10 mix-blend-multiply"></div>
       </div>
 
       <div className="max-w-6xl mx-auto relative z-10">
@@ -106,16 +98,16 @@ const Contact = () => {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={containerVariants}
-          className="text-center mb-20"
+          className="text-center mb-14 sm:mb-20"
         >
           <motion.div variants={itemVariants}>
-            <span className="inline-block text-sm font-medium text-indigo-400 mb-3 tracking-wider">
+            <span className="inline-block text-sm font-medium text-indigo-400 mb-2 tracking-wider">
               LET'S CONNECT
             </span>
           </motion.div>
           <motion.h2
             variants={itemVariants}
-            className="text-4xl md:text-5xl font-bold text-gray-100 mb-4"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-100 mb-4"
           >
             Get In{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-emerald-400">
@@ -123,53 +115,47 @@ const Contact = () => {
             </span>
           </motion.h2>
           <motion.div variants={itemVariants}>
-            <div className="w-20 h-1 bg-gradient-to-r from-indigo-500 to-emerald-500 mx-auto rounded-full"></div>
+            <div className="w-16 sm:w-20 h-1 bg-gradient-to-r from-indigo-500 to-emerald-500 mx-auto rounded-full"></div>
           </motion.div>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="bg-gray-900/50 border border-gray-800 rounded-2xl p-8 backdrop-blur-sm"
+            className="bg-gray-900/50 border border-gray-800 rounded-2xl p-6 sm:p-8 backdrop-blur-sm"
           >
-            <h3 className="text-xl font-semibold text-gray-100 mb-6">
+            <h3 className="text-lg sm:text-xl font-semibold text-gray-100 mb-6">
               Send me a message
             </h3>
 
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-medium text-gray-400 mb-2"
-                  >
+                  <label htmlFor="name" className="block text-sm text-gray-400 mb-2">
                     Name
                   </label>
                   <input
                     type="text"
                     id="name"
                     name="name"
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     placeholder="Your name"
                     required
                   />
                 </div>
                 <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-gray-400 mb-2"
-                  >
+                  <label htmlFor="email" className="block text-sm text-gray-400 mb-2">
                     Email
                   </label>
                   <input
                     type="email"
                     id="email"
                     name="email"
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     placeholder="your@email.com"
                     required
                   />
@@ -177,40 +163,33 @@ const Contact = () => {
               </div>
 
               <div>
-                <label
-                  htmlFor="subject"
-                  className="block text-sm font-medium text-gray-400 mb-2"
-                >
+                <label htmlFor="subject" className="block text-sm text-gray-400 mb-2">
                   Subject
                 </label>
                 <input
                   type="text"
                   id="subject"
                   name="subject"
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   placeholder="What's this about?"
                   required
                 />
               </div>
 
               <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-gray-400 mb-2"
-                >
+                <label htmlFor="message" className="block text-sm text-gray-400 mb-2">
                   Message
                 </label>
                 <textarea
                   id="message"
                   name="message"
                   rows="5"
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   placeholder="Your message here..."
                   required
                 ></textarea>
               </div>
 
-              {/* Status message */}
               {submitStatus === "success" && (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
@@ -226,8 +205,7 @@ const Contact = () => {
                   animate={{ opacity: 1, y: 0 }}
                   className="p-3 bg-red-900/30 border border-red-700 rounded-lg text-red-400 text-sm"
                 >
-                  Oops! Something went wrong. Please try again or contact me
-                  directly.
+                  Oops! Something went wrong. Please try again or contact me directly.
                 </motion.div>
               )}
 
@@ -239,7 +217,7 @@ const Contact = () => {
                 whileTap={{ scale: 0.98 }}
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full  text-white rounded-lg bg-gray-800 hover:bg-gray-700 px-8 py-4 text-sm tracking-wider transition-all duration-300 border border-gray-700 hover:border-indigo-600 disabled:cursor-not-allowed"
+                className="w-full text-white rounded-lg bg-gray-800 hover:bg-gray-700 px-8 py-4 text-sm tracking-wider transition-all duration-300 border border-gray-700 hover:border-indigo-600 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <span className="flex items-center justify-center">
@@ -272,7 +250,7 @@ const Contact = () => {
             </form>
           </motion.div>
 
-          {/* Contact Info */}
+          {/* Contact Info & Social Links */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -280,11 +258,10 @@ const Contact = () => {
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <div className="bg-gray-900/50 border border-gray-800 rounded-2xl p-8 backdrop-blur-sm">
-              <h3 className="text-xl font-semibold text-gray-100 mb-6">
+            <div className="bg-gray-900/50 border border-gray-800 rounded-2xl p-6 sm:p-8 backdrop-blur-sm">
+              <h3 className="text-lg sm:text-xl font-semibold text-gray-100 mb-6">
                 Contact information
               </h3>
-
               <div className="space-y-6">
                 <motion.a
                   whileHover={{ x: 5 }}
@@ -318,11 +295,11 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="bg-gray-900/50 border border-gray-800 rounded-2xl p-8 backdrop-blur-sm">
-              <h3 className="text-xl font-semibold text-gray-100 mb-6">
-                Social Link
+            <div className="bg-gray-900/50 border border-gray-800 rounded-2xl p-6 sm:p-8 backdrop-blur-sm">
+              <h3 className="text-lg sm:text-xl font-semibold text-gray-100 mb-6">
+                Social Links
               </h3>
-              <div className="grid grid-cols-2 gap-3 max-w-sm mx-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {socialLinks.map((link, index) => (
                   <motion.a
                     key={index}
@@ -336,7 +313,7 @@ const Contact = () => {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`flex items-center justify-center gap-3 p-5 border border-gray-800 rounded-lg transition-all ${
+                    className={`flex items-center justify-center gap-3 p-4 border border-gray-800 rounded-lg transition-all ${
                       link.name === "WhatsApp"
                         ? "hover:border-emerald-500 text-emerald-400"
                         : "hover:border-indigo-500 text-indigo-400"
@@ -351,25 +328,6 @@ const Contact = () => {
           </motion.div>
         </div>
       </div>
-
-      {/* Floating message button */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1 }}
-        className="fixed bottom-8 right-8 z-50"
-      >
-        {/* <motion.a
-          whileHover={{ scale: 1.1, rotate: 5 }}
-          whileTap={{ scale: 0.95 }}
-          href="https://wa.me/+919974212669"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center w-16 h-16 bg-emerald-600 rounded-full shadow-lg text-white"
-        >
-          <SiWhatsapp className="text-2xl" />
-        </motion.a> */}
-      </motion.div>
     </section>
   );
 };
